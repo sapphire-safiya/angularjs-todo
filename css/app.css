@@ -1,0 +1,13 @@
+body{background-color: #f2f2f2;}
+
+#mainWrapper{max-width:960px;margin:20px auto;font-family: arial;}
+.selectBox{  height: 100%;  width: 100%;  position: absolute;  left: 0;  top: 0;  z-index: 4;  font-size: 14px;}
+
+.pending-tasks .high{background-color: #FFB2B2 !important;}
+.pending-tasks .medium{background-color: darkturquoise!important;}
+.pending-tasks .low{ background-color: greenyellow!important;}
+
+.completed-tasks .form-control {  text-decoration: line-through!important;}
+.completed-tasks .high{color: #FFB2B2 !important;}
+.completed-tasks .medium{color: darkturquoise!important;}
+.completed-tasks .low{color: greenyellow!important;}

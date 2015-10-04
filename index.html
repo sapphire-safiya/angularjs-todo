@@ -1,0 +1,59 @@
+<!Doctype html>
+<html ng-app="toDoApp" ng-controller="taskController">
+    <head>
+        <title>To do!</title>
+        
+        <!--- styles starts------->
+        <link rel="stylesheet" href="css/bootstrap.css"/>
+        <link rel="stylesheet" href="css/app.css"/>
+    </head>
+    <body>
+        
+        <div id="mainWrapper" class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="new-task">
+                     <div class="input-group">
+                          <div class="input-group-btn">
+                              <button type="button" class="btn btn-default dropdown-toggle">{{priority|uppercase}} <span class="caret"></span></button>
+                            <select class="selectBox" ng-model="priority">
+                              <option ng-repeat="x in priorities" value="{{x}}">{{x| uppercase}}</option>
+                            </select>
+                          </div><!-- /btn-group -->
+                          <input type="text" class="form-control" ng-model="title" placeholder="Add new task" />
+                         <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" ng-click="addTask()">Add</button>
+                          </span>
+                        </div>
+                </div>
+                    <h1>TO DO list:</h1>
+                    <div class="pending-tasks">
+                        <div class="input-group" ng-repeat="task in storage.tasks | orderBy:'priority.value' | filter:false">    
+                          <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" ng-click="task.complete()">Done</button>
+                          </span>
+                          <input type="text" class="form-control {{task.priority.name}}" disabled value="{{task.title}}">
+                        </div>
+                        <p>{{(storage.tasks|filter:false).length}} <ng-pluralize count="(storage.tasks|filter:false).length" when="{0:'task',1:'task',other:'tasks'}"></ng-pluralize> left!</p>
+                    </div>
+                    <h2>Tasks completed today:</h2>
+                    <div class="completed-tasks">
+                        <div class="input-group" ng-repeat="task in storage.tasks | orderBy:'priority.value' | filter:true">
+                          <span class="input-group-addon" id="basic-addon1">@</span>
+                          <input type="text" class="form-control {{task.priority.name}}" value="{{task.title}}" aria-describedby="basic-addon1" disabled>
+                        </div>
+                        <p>{{(storage.tasks|filter:true).length}} tasks Completed!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!--- scripts starts------->
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/angular.js"></script>
+        <script src="https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js"></script>
+        <script type="text/javascript" src="js/app/task.js"></script>
+        <script type="text/javascript" src="js/app/app.js"></script>
+        
+    </body>
+</html>
